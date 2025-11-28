@@ -85,9 +85,13 @@ public class BankingMain {
 		JPanel tsLogin = new JPanel();
 		tbMenu.addTab("Log in page", null, tsLogin, null);
 		tbMenu.setEnabledAt(1, true);
-		tsLogin.setLayout(null);		// The 3 lines from the automatic creation have been put in the btnWelcome section to make this work
-									   // Not sure if I need to do this for EVERY button that goes to tsLogin page
-									  // We need to keep this here for it to show in  the Design page
+		tsLogin.setLayout(null);		
+		// The 3 lines from the automatic creation have been put in the btnWelcome section to make this work
+		// Not sure if I need to do this for EVERY button that goes to tsLogin page
+		// We need to keep this here for it to show in  the Design page
+		// CANNOT ADD PROCEDURE TO REDUCE CODE
+		// SHOULD PROBABLY JUST DISABLE TABS
+		
 		// WELCOME BUTTON
 		JButton btnWelcome_Login = new JButton("Log in");
 		btnWelcome_Login.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -293,3 +297,4 @@ public class BankingMain {
 		
 	}
 }
+
