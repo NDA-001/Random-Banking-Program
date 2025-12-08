@@ -51,7 +51,8 @@ public class BankingMain {
 	public BankingMain() {
 		initialize();
 	}
-
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -59,27 +60,20 @@ public class BankingMain {
 		frmMainProgram = new JFrame();
 		frmMainProgram.setTitle("Unnamed Bank");
 		frmMainProgram.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		frmMainProgram.setBounds(100, 100, 450, 300);
+		frmMainProgram.setBounds(100, 100, 451, 322);
 		frmMainProgram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMainProgram.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JTabbedPane tbMenu = new JTabbedPane(JTabbedPane.TOP);
+		tbMenu.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		frmMainProgram.getContentPane().add(tbMenu);
 		
-		JPanel tsWelcome = new JPanel();
-		tbMenu.addTab("Welcome Page", null, tsWelcome, null);
-		tsWelcome.setLayout(null);
+		JTabbedPane tbLogCreate = new JTabbedPane(JTabbedPane.TOP);
+		tbMenu.addTab("Main page", null, tbLogCreate, null);
 		
-		JButton btnWelcome_Login = new JButton("Log in");
-		btnWelcome_Login.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnWelcome_Login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// BtnLogIn, Redirect to Log In page
-				tbMenu.setSelectedIndex(1);
-			}
-		});
-		btnWelcome_Login.setBounds(45, 89, 150, 23);
-		tsWelcome.add(btnWelcome_Login);
+		JPanel tsWelcome = new JPanel();
+		tbLogCreate.addTab("Welcome", null, tsWelcome, null);
+		tsWelcome.setLayout(null);
 		
 		JButton btnWelcomeCreate = new JButton("Create Account");
 		btnWelcomeCreate.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -91,12 +85,30 @@ public class BankingMain {
 		});
 		btnWelcomeCreate.setBounds(230, 89, 150, 23);
 		tsWelcome.add(btnWelcomeCreate);
+		// Not sure if I need to do this for EVERY button that goes to tsLogin page
+									  // We need to keep this here for it to show in  the Design page
+		// WELCOME BUTTON
+		JButton btnWelcome_Login = new JButton("Log in");
+		btnWelcome_Login.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnWelcome_Login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// BtnLogIn, Redirect to Log In page
+				
+				// Stole this from the automatic creation
+				// now this doesnt show up in design
+			
+			}
+		});
+		btnWelcome_Login.setBounds(45, 89, 150, 23);
+		tsWelcome.add(btnWelcome_Login);
 		
 		JPanel tsLogin = new JPanel();
-		tbMenu.addTab("Log in page", null, tsLogin, null);
-		tsLogin.setLayout(null);
+		tbLogCreate.addTab("Log In", null, tsLogin, null);
+		tsLogin.setLayout(null);		// The 3 lines from the automatic creation have been put in the btnWelcome section to make this work
+		// END WELCOME BUTTON
 		
 		JLabel lblID_login = new JLabel("Enter ID");
+		lblID_login.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblID_login.setBounds(10, 11, 55, 14);
 		tsLogin.add(lblID_login);
 		
@@ -107,6 +119,7 @@ public class BankingMain {
 		edtID_login.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Enter password");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel.setBounds(10, 67, 86, 14);
 		tsLogin.add(lblNewLabel);
 		
@@ -126,10 +139,11 @@ public class BankingMain {
 		tsLogin.add(pwfLogin_Password);
 		
 		JPanel tsCreate = new JPanel();
-		tbMenu.addTab("Account Creation", null, tsCreate, null);
+		tbLogCreate.addTab("Create Account", null, tsCreate, null);
 		tsCreate.setLayout(null);
 		
 		JLabel lblCreate_FirstName = new JLabel("First Name");
+		lblCreate_FirstName.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblCreate_FirstName.setBounds(10, 11, 64, 14);
 		tsCreate.add(lblCreate_FirstName);
 		
@@ -139,6 +153,7 @@ public class BankingMain {
 		edtCreate_FirstName.setColumns(10);
 		
 		JLabel lblCreate_Surname = new JLabel("Surname");
+		lblCreate_Surname.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblCreate_Surname.setBounds(10, 67, 64, 14);
 		tsCreate.add(lblCreate_Surname);
 		
@@ -148,6 +163,7 @@ public class BankingMain {
 		edtCreate_Surname.setColumns(10);
 		
 		JLabel lblCreate_ID = new JLabel("Enter ID number");
+		lblCreate_ID.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblCreate_ID.setBounds(176, 11, 101, 14);
 		tsCreate.add(lblCreate_ID);
 		
@@ -168,6 +184,7 @@ public class BankingMain {
 		tsCreate.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("Create password");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_1.setBounds(176, 67, 104, 14);
 		tsCreate.add(lblNewLabel_1);
 		
@@ -176,6 +193,7 @@ public class BankingMain {
 		tsCreate.add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("Confirm password");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_2.setBounds(176, 123, 101, 14);
 		tsCreate.add(lblNewLabel_2);
 		
@@ -183,8 +201,22 @@ public class BankingMain {
 		passwordField_1.setBounds(176, 148, 120, 20);
 		tsCreate.add(passwordField_1);
 		
+		
+		{	// Creating code block here to set all tabs to visible = false; user doesnt need to see it
+			// Has to be at the end of the program to account for ALL tabs and what not
+			int i = 1, MenuCount = tbMenu.getTabCount();
+			while (i < MenuCount) { // cannot use tbMenu.getTabCount, it will skip numbers since tbMenu.getTabCount will change as tabs are removed
+				tbMenu.remove(1);
+				i++;
+			}
+			tbMenu.setSelectedIndex(0);
+		}
+		
+		JTabbedPane tbClientAccess = new JTabbedPane(JTabbedPane.TOP);
+		tbMenu.addTab("Client page", null, tbClientAccess, null);
+		
 		JPanel tsClientPage = new JPanel();
-		tbMenu.addTab("Client Account", null, tsClientPage, null);
+		tbClientAccess.addTab("Home", null, tsClientPage, null);
 		tsClientPage.setLayout(null);
 		
 		JTextArea txtClient_Output = new JTextArea();
@@ -239,13 +271,20 @@ public class BankingMain {
 		tsClientPage.add(btnClient_Menu);
 		
 		JButton btnClient_Exit = new JButton("Exit");
+		btnClient_Exit.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnClient_Exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//
+				// Exit button
+				System.exit(0);
 				
 			}
 		});
 		btnClient_Exit.setBounds(353, 199, 66, 23);
 		tsClientPage.add(btnClient_Exit);
+		
+		JPanel tsInvesting = new JPanel();
+		tbClientAccess.addTab("Investing", null, tsInvesting, null);
+		
+		
 	}
 }
