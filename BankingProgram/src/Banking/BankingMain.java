@@ -51,7 +51,8 @@ public class BankingMain {
 	public BankingMain() {
 		initialize();
 	}
-
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -59,7 +60,7 @@ public class BankingMain {
 		frmMainProgram = new JFrame();
 		frmMainProgram.setTitle("Unnamed Bank");
 		frmMainProgram.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		frmMainProgram.setBounds(100, 100, 450, 300);
+		frmMainProgram.setBounds(100, 100, 451, 322);
 		frmMainProgram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMainProgram.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -67,8 +68,11 @@ public class BankingMain {
 		tbMenu.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		frmMainProgram.getContentPane().add(tbMenu);
 		
+		JTabbedPane tbLogCreate = new JTabbedPane(JTabbedPane.TOP);
+		tbMenu.addTab("Main page", null, tbLogCreate, null);
+		
 		JPanel tsWelcome = new JPanel();
-		tbMenu.addTab("Welcome Page", null, tsWelcome, null);
+		tbLogCreate.addTab("Welcome", null, tsWelcome, null);
 		tsWelcome.setLayout(null);
 		
 		JButton btnWelcomeCreate = new JButton("Create Account");
@@ -81,37 +85,26 @@ public class BankingMain {
 		});
 		btnWelcomeCreate.setBounds(230, 89, 150, 23);
 		tsWelcome.add(btnWelcomeCreate);
-		
-		JPanel tsLogin = new JPanel();
-		tbMenu.addTab("Log in page", null, tsLogin, null);
-		tbMenu.setEnabledAt(1, true);
-		tsLogin.setLayout(null);		
-		// The 3 lines from the automatic creation have been put in the btnWelcome section to make this work
 		// Not sure if I need to do this for EVERY button that goes to tsLogin page
-		// We need to keep this here for it to show in  the Design page
-		// CANNOT ADD PROCEDURE TO REDUCE CODE
-		// SHOULD PROBABLY JUST DISABLE TABS
-		
+									  // We need to keep this here for it to show in  the Design page
 		// WELCOME BUTTON
 		JButton btnWelcome_Login = new JButton("Log in");
 		btnWelcome_Login.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnWelcome_Login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// BtnLogIn, Redirect to Log In page
-				tbMenu.add(tsLogin);
 				
 				// Stole this from the automatic creation
-				tbMenu.addTab("Log in page", null, tsLogin, null);
-				tbMenu.setEnabledAt(1, true);
-				tsLogin.setLayout(null);
 				// now this doesnt show up in design
-				
-				tbMenu.setSelectedIndex(1);
-				tbMenu.remove(0);
+			
 			}
 		});
 		btnWelcome_Login.setBounds(45, 89, 150, 23);
 		tsWelcome.add(btnWelcome_Login);
+		
+		JPanel tsLogin = new JPanel();
+		tbLogCreate.addTab("Log In", null, tsLogin, null);
+		tsLogin.setLayout(null);		// The 3 lines from the automatic creation have been put in the btnWelcome section to make this work
 		// END WELCOME BUTTON
 		
 		JLabel lblID_login = new JLabel("Enter ID");
@@ -146,7 +139,7 @@ public class BankingMain {
 		tsLogin.add(pwfLogin_Password);
 		
 		JPanel tsCreate = new JPanel();
-		tbMenu.addTab("Account Creation", null, tsCreate, null);
+		tbLogCreate.addTab("Create Account", null, tsCreate, null);
 		tsCreate.setLayout(null);
 		
 		JLabel lblCreate_FirstName = new JLabel("First Name");
@@ -208,8 +201,22 @@ public class BankingMain {
 		passwordField_1.setBounds(176, 148, 120, 20);
 		tsCreate.add(passwordField_1);
 		
+		
+		{	// Creating code block here to set all tabs to visible = false; user doesnt need to see it
+			// Has to be at the end of the program to account for ALL tabs and what not
+			int i = 1, MenuCount = tbMenu.getTabCount();
+			while (i < MenuCount) { // cannot use tbMenu.getTabCount, it will skip numbers since tbMenu.getTabCount will change as tabs are removed
+				tbMenu.remove(1);
+				i++;
+			}
+			tbMenu.setSelectedIndex(0);
+		}
+		
+		JTabbedPane tbClientAccess = new JTabbedPane(JTabbedPane.TOP);
+		tbMenu.addTab("Client page", null, tbClientAccess, null);
+		
 		JPanel tsClientPage = new JPanel();
-		tbMenu.addTab("Client Account", null, tsClientPage, null);
+		tbClientAccess.addTab("Home", null, tsClientPage, null);
 		tsClientPage.setLayout(null);
 		
 		JTextArea txtClient_Output = new JTextArea();
@@ -275,26 +282,9 @@ public class BankingMain {
 		btnClient_Exit.setBounds(353, 199, 66, 23);
 		tsClientPage.add(btnClient_Exit);
 		
-		JButton btnClient_Invest = new JButton("Invest!");
-		btnClient_Invest.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnClient_Invest.setBounds(10, 0, 89, 23);
-		tsClientPage.add(btnClient_Invest);
-		
 		JPanel tsInvesting = new JPanel();
-		tbMenu.addTab("Investing", null, tsInvesting, null);
-		
-		
-		{	// Creating code block here to set all tabs to visible = false; user doesnt need to see it
-			// Has to be at the end of the program to account for ALL tabs and what not
-			int i = 1, MenuCount = tbMenu.getTabCount();
-			while (i < MenuCount) { // cannot use tbMenu.getTabCount, it will skip numbers since tbMenu.getTabCount will change as tabs are removed
-				tbMenu.remove(1);
-				i++;
-			}
-			tbMenu.setSelectedIndex(0);
-		}
+		tbClientAccess.addTab("Investing", null, tsInvesting, null);
 		
 		
 	}
 }
-
